@@ -1,0 +1,13 @@
+require('dotenv').config();
+const http = require('http');
+const express = require('express');
+const indexRouter = require('./routes/index-route');
+const commandRouter = require('./routes/command-route');
+const app = express();
+app.use(express.json());
+app.use('/', indexRouter);
+app.use('/api', commandRouter);
+const server = http.createServer(app);
+const port = process.env.PORT;
+server.listen(port);
+console.debug('Server listening on port ' + port);
